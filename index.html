@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href="sources/style.css">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <!--header section sould just contain the title of the page and be styled to white text with a gradiant background-->
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <div class = "contentContainer">
+        <aside>
+            <div class = "searchSetup">
+                <h2>Search for a City</h2>
+                <form class = "searchInput">
+                    <input type="text">
+                    <input type="submit">
+                </form>
+            </div>
+            <div class = "seachHistory">
+                <p class =  "savedCity"> Placeholder city</p>
+            </div>
+        </aside>
+        <main>
+            <div class = "searchResults">
+                <h2 class = "city"></h2>
+                <p class = "temperature"></p>
+                <p class = "windSpeed"></p>
+                <p class = "humidity"></p>
+                <p class = "uvIndex"></p>
+            </div>
+            <div class = "forcast">
+                <h3>5-Day Forcast:</h3>
+                <div class = "daysContainer">
+                    <div class = "dayDisplay"></div>
+                    <div class = "dayDisplay"></div>
+                    <div class = "dayDisplay"></div>
+                    <div class = "dayDisplay"></div>
+                    <div class = "dayDisplay"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+</body>
+</html>
