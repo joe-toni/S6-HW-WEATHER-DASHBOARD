@@ -8,30 +8,39 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <!--header section sould just contain the title of the page and be styled to white text with a gradiant background-->
+    <!--Header section will only contain the page title-->
     <header>
         <h1>Weather Dashboard</h1>
     </header>
+    <!--This section div will contain both the main content search results and the aside search bar-->
     <div class = "contentContainer">
         <aside>
             <div class = "searchSetup">
-                <h2>Search for a City</h2>
+                <h2>Search for a City:</h2>
                 <form class = "searchInput">
-                    <input type="text">
-                    <input type="submit">
+                    <input type="text"class = "searchBar">
+                    <input type="submit" class = "searchBtn">
                 </form>
             </div>
             <div class = "seachHistory">
                 <p class =  "savedCity"> Placeholder city</p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
             </div>
         </aside>
         <main>
             <div class = "searchResults">
-                <h2 class = "city"></h2>
-                <p class = "temperature"></p>
-                <p class = "windSpeed"></p>
-                <p class = "humidity"></p>
-                <p class = "uvIndex"></p>
+                <h2 class = "city">Atlanta (3/30/2021)cloudy</h2>
+                <p class = "temperature">Temp: 74.01</p>
+                <p class = "windSpeed">Wind: 6.67 mph</p>
+                <p class = "humidity"> Humidity: 46%</p>
+                <p class = "uvIndex">square</p>
             </div>
             <div class = "forcast">
                 <h3>5-Day Forcast:</h3>

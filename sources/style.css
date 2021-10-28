@@ -1,19 +1,129 @@
-:root
-{
-    --title-blue-dark: rgb(32, 9, 75);
-    --title-blue-light: rgb(52, 99, 188);
-    --search-blue: rgb(80, 152, 230);
-    --day-blue: rgb(45, 62, 80);
+/*Set up all the colors used in the demo as root variables for easier reference later on*/
+    :root
+    {
+        --title-blue-dark: rgb(32, 9, 75);
+        --title-blue-light: rgb(52, 99, 188);
+        --search-blue: rgb(80, 152, 230);
+        --day-blue: rgb(45, 62, 80);
+        --solid-grey: rgb(128, 128, 128);
+        --light-grey: rgb(174, 174, 174);
+    
+    }
+/**/
 
-}
+/*Assigned a calculated height to the body as the whole page container to allow easier designation of portions
+to each contained section*/
+    body
+    {
+        display: flex;
+        height: 100vh;
+        border: 5px dashed grey;
+        flex-direction: column;
+    }
 
-header 
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 50px;
-    background-image: linear-gradient(to right, var(--title-blue-light), var(--title-blue-dark));
-    color: white;
-}
+    header 
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 10%;
+        background-image: linear-gradient(to right, var(--title-blue-light), var(--title-blue-dark));
+        color: white;
+    }
+/**/
+
+/*This is where styling for the main content begins*/
+    .contentContainer
+    { 
+        padding: 10px;
+        display: flex;
+        height: 90%;
+    }
+/**/
+
+/*This portion of styling is designated for side bar type search function*/
+    /*This portions styles the search function title and form input*/
+        aside
+        {
+            flex-basis: 20%;
+            padding: 0 10px 0 0;
+        }
+
+        aside h2
+        {
+            line-height: 5px;
+        }
+
+        form
+        {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 2px solid var(--solid-grey);
+        }
+
+        input
+        {
+            height: 25px;
+            border-radius: 5px;
+            margin: 0 0 10px 0;
+        }
+
+        .searchBtn
+        {
+            color:white;
+            border: none;
+            background-color: var(--search-blue);
+        }
+    /*Styling for the search history portion of the aside bar*/
+            .savedCity
+        {
+            text-align: center;
+            line-height: 30px;
+            height: 30px;
+            border-radius: 5px;
+            width: 100%;
+            background-color: var(--light-grey);
+        }
+/**/
+
+/*This is where styling for both the search results and the 5 day for cast Begins*/
+    /*Styling for the search results container*/
+        main
+            {
+                padding: 0 10px;
+                flex-basis: 80%;
+            }
+
+        .searchResults
+        {
+            padding: 0 0 0 5px;
+            border: 3px solid black;
+            height: 40%;
+        }
+    /*This container styles the divisions of each forcast day container*/
+        .forcast
+        {
+            height: 60%;
+        }
+
+        .forcast h3
+        {
+            line-height: 5px;
+            height: 1%;
+        }
+
+        .daysContainer
+        {
+            display: flex;
+            justify-content: space-between;
+            height: 60% ;
+        }
+
+        .dayDisplay
+        {
+            background-color: var(--day-blue);
+            height: 100%;
+            width: 15%;
+        }
+/**/
