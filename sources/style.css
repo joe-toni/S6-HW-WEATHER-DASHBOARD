@@ -17,8 +17,8 @@ to each contained section*/
     {
         display: flex;
         height: 100vh;
-        border: 5px dashed grey;
         flex-direction: column;
+        font-family:Arial, Helvetica, sans-serif;
     }
 
     header 
@@ -48,11 +48,6 @@ to each contained section*/
         {
             flex-basis: 20%;
             padding: 0 10px 0 0;
-        }
-
-        aside h2
-        {
-            line-height: 5px;
         }
 
         form
@@ -97,10 +92,17 @@ to each contained section*/
 
         .searchResults
         {
+            line-height: 15px;
             padding: 0 0 0 5px;
             border: 3px solid black;
             height: 40%;
         }
+
+        .searchResults img
+        { 
+            margin: 0 0 -18px -12px;
+        }
+
     /*This container styles the divisions of each forcast day container*/
         .forcast
         {
@@ -121,9 +123,21 @@ to each contained section*/
         }
 
         .dayDisplay
-        {
+        { 
+            padding: 0px 10px 20px 10px;
+            line-height: 20px;
+            color: white;
             background-color: var(--day-blue);
             height: 100%;
             width: 15%;
+        }
+
+        .dayDisplay h4
+        {
+            margin: 10px 0px;
+        }
+        .dayDisplay img 
+        {
+            margin: -5px 0px;
         }
 /**/
