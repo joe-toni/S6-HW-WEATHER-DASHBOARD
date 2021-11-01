@@ -71,13 +71,14 @@ to each contained section*/
             background-color: var(--search-blue);
         }
 
+        /*This class will allow the search history to be scrollable when the results overflow the allowable space*/
         .searchHistory
         {
             height: 70%;
             overflow-y: auto;
         }
 
-    /*Styling for the search history portion of the aside bar*/
+    /*Styling for the search Histoy result buttons*/
             .savedCity
         {
             text-align: center;
@@ -110,6 +111,26 @@ to each contained section*/
             margin: 0 0 -18px -12px;
         }
 
+        /*The following sections determine the style and color of the uvIndex display*/
+        span
+        {
+            padding: 3px;
+            border-radius: 3px;
+        }
+
+        .favorable
+        {
+            background-color: green;
+        }
+        .moderate
+        {
+            background-color: orange;
+        }
+        .severe
+        {
+            background-color: red;
+        }
+        
     /*This container styles the divisions of each forcast day container*/
         .forcast
         {

@@ -12,12 +12,8 @@
      ];
     //
 
-    //This area query selects all the necessary elments from the document and converts them
-    // into jquery objects for easier manipulation.
+    //This area query selects all the necessary elments from the document for easier manipulation later on
         const jqHistory = $(".searchHistory");
-       // const jqHistory = [];
-       // history.forEach(element => jqHistory.push($(element)));
-
         const jqToday = $(".searchResults");
 
         const days = document.querySelectorAll(".dayDisplay");
@@ -25,7 +21,7 @@
         days.forEach(element => jqDays.push($(element)));
     //
 
-    //This portion initiallizes an object that will hold all the neccisary values to be displayed for our city
+    //This portion initiallizes an object that will hold all the neccisary values to be displayed for our searched city
      const currentCity =
      {
          name: "",
@@ -38,8 +34,7 @@
      }
     //
 
-    //This is an array of objects that will hold the values for each upcomming forcast day with each 
-    //individual object represening one day
+    //This is an array of objects that will hold the values for each upcomming forcast day with each object represening one day
      const forcast =
          [
          {
@@ -79,78 +74,90 @@
          }
          ]
     //
+    
+    //This variable will be given the city name for use by the main getWeather function
+        var city = "";
+    //This array will be given the city names saved to localStorage as well as any newly searched results
+        var searchedCities = [];
 //spacing
    
-//This is a place holder variable used to test the information retrieved by the API
-var city = "";
-var searchedCities = [];
+//This portion obtains the form resposible for user input and adds an event listener that gets the input
+//prevents form default behavior and runs the get weather fucntion with the newly set city name
+    const userEntry = $(".searchInput");
+    const cityInput = $(".searchField");
+    userEntry.on("submit", function()
+    {
+        event.preventDefault();
+        city = cityInput.val();
+        cityInput.val("");
+        getTheWeather();
+    });
+//
 
-const userEntry = $(".searchInput");
-const cityInput = $(".searchField");
-console.log(cityInput.val());
-userEntry.on("submit", function()
-{
-    event.preventDefault();
-    city = cityInput.val();
-    cityInput.val("");
-    getTheWeather();
-});
-
+//These two initial function calls make sure the necessary local storage object exists and is pulled before
+//either running a preset weather API call or one determined by the most recent search histoy result
 initialSetup();
 startingPageSetup();
 
 //This function checks to see if a local storage item exists setting one up if not and simply
 //pulling and populating the information if  it does.
-function initialSetup()
-{
-    if(localStorage.getItem("searchHistory")===null)
+    function initialSetup()
     {
-        localStorage.setItem("searchHistory", JSON.stringify(searchedCities));
+        if(localStorage.getItem("searchHistory")===null)
+        {
+            localStorage.setItem("searchHistory", JSON.stringify(searchedCities));
+        };
+        let storagePull = JSON.parse(localStorage.getItem("searchHistory"));
+        for( let i = 0; i < storagePull.length; i++)
+        {
+            searchedCities.push(storagePull[i]);
+        } 
     };
-    let storagePull = JSON.parse(localStorage.getItem("searchHistory"));
-    console.log(storagePull);
-    for( let i = 0; i < storagePull.length; i++)
-    {
-        searchedCities.push(storagePull[i]);
-    } 
-};
+//
 
 //This function will run an example city if it is the users first time running the site or loading
 // the most recent searched city if one is found in local storage after settup.
-function startingPageSetup()
-{
-    if(searchedCities.length === 0 )
+    function startingPageSetup()
     {
-        city = "Atlanta";
-        getTheWeather();
+        if(searchedCities.length === 0 )
+        {
+            city = "Atlanta";
+            getTheWeather();
+        }
+        else
+        {
+            let mostRecent = searchedCities.length-1;
+            city = searchedCities[mostRecent];
+            getTheWeather();
+        }
     }
-    else
-    {
-        let mostRecent = searchedCities.length-1;
-        city = searchedCities[mostRecent];
-        getTheWeather();
-    }
-}
+//
 
 //This function will display the search history saved in the local varaible by appending new html elements
 //directly to the existing div, after clearing the existing ones to avoid repeating lists.
-function displaySearchHistory()
-{
-    jqHistory.html("");
-    if(searchedCities.length > 0)
+    function displaySearchHistory()
     {
-       let  index = searchedCities.length - 1;
-       //let postition = 0;
-        while(index >= 0)
+        jqHistory.html("");
+        if(searchedCities.length > 0)
         {
-            jqHistory.append(`<p class = "savedCity">${searchedCities[index]}</p>`)
-           // jqHistory[postition].html(searchedCities[index]).addClass("savedCity");
-            index--;
-           // postition++;
+           let  index = searchedCities.length - 1;
+            while(index >= 0)
+            {
+                jqHistory.append(`<p class = "savedCity" onclick = "getClickedWeather()">${searchedCities[index]}</p>`)
+                index--;
+            }
         }
-    }
-};
+    };
+//
 
+//This function sets the city value according to whats contained in the clicked html element and 
+//runs the get weather function with the newly set information.
+    function getClickedWeather()
+    {
+        city = event.target.innerHTML;
+        getTheWeather();
+    };
+//
 
 //Calling the API & Setting Data
     //This is the main function and first aquires the coordinates of the searched city from an initial API call then uses that same information
@@ -202,36 +209,35 @@ function displaySearchHistory()
 //Section End
 
 //This function will check if the current searched city is already saved in the search history array pushing it to the
-//front of the list if so or simply adding it in if not.
-function adjustSearchHistory()
-{
-    if(searchedCities.includes(currentCity.name))
+//front of the list if so or simply adding it in if not then calling the displaySearchHistory function to refresh the display
+    function adjustSearchHistory()
     {
-        let index = searchedCities.indexOf(currentCity.name);
-        while (index != searchedCities.length-1)
+        if(searchedCities.includes(currentCity.name))
         {
-            let temporary = searchedCities[index];
-            searchedCities[index] = searchedCities[index + 1];
-            searchedCities[index + 1] = temporary;
-            index++;
+            let index = searchedCities.indexOf(currentCity.name);
+            while (index != searchedCities.length-1)
+            {
+                let temporary = searchedCities[index];
+                searchedCities[index] = searchedCities[index + 1];
+                searchedCities[index + 1] = temporary;
+                index++;
+            }
         }
-        console.log(searchedCities);
-    }
-    else
-    {
-        console.log(searchedCities);
-        searchedCities.push(currentCity.name);
+        else
+        {
+            searchedCities.push(currentCity.name);
+        };
+        localStorage.setItem("searchHistory", JSON.stringify(searchedCities));
+        displaySearchHistory();
     };
-    localStorage.setItem("searchHistory", JSON.stringify(searchedCities));
-    displaySearchHistory();
-};
+//
 
  //Displaying Fetch Results
     //The following functions should correctly display the resulting data from our fetch request but should only
     //ever be called from inside the request to make sure the elments are only populating once the data is obtained.
       
         //This function takes our currentCity object and displays its values by adding them directly into the inner html
-        //of our queried display element
+        //of our queried display element it also checks the value of the uvIndex to add the designated class
          function displayResults(cityObject)
          {
              jqToday.html
@@ -242,9 +248,15 @@ function adjustSearchHistory()
                  <p>Temp: ${cityObject.temperature} &deg F</p>
                  <p>wind: ${cityObject.wind} MPH</p>
                  <p>Humidity: ${cityObject.humidity}%</p>
-                 <p> UV Index: ${cityObject.uvIndex}</p>`
+                 <p> UV Index: <span>${cityObject.uvIndex}</span></p>`
              )
-                
+             let uvIndex = $("span");
+             if(cityObject.uvIndex < 0.5)
+             {uvIndex.addClass("favorable");}   
+             else if (cityObject.uvIndex<0.8)
+             {uvIndex.addClass("moderate");}
+             else
+             {uvIndex.addClass("severe");}          
          };
         //
 
