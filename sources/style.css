@@ -70,6 +70,13 @@ to each contained section*/
             border: none;
             background-color: var(--search-blue);
         }
+
+        .searchHistory
+        {
+            height: 70%;
+            overflow-y: auto;
+        }
+
     /*Styling for the search history portion of the aside bar*/
             .savedCity
         {
