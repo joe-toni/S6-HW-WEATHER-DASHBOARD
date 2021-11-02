@@ -100,12 +100,21 @@ to each contained section*/
 
         .searchResults
         {
+
             line-height: 15px;
             padding: 0 0 0 5px;
             border: 3px solid black;
             height: 40%;
         }
 
+        .searchResults h3
+        {
+            margin: 1px 0 15px 0;
+        }
+        .searchResults p
+        {
+            margin: 1px 0 15px 0;
+        }
         .searchResults img
         { 
             margin: 0 0 -18px -12px;
@@ -130,7 +139,7 @@ to each contained section*/
         {
             background-color: red;
         }
-        
+
     /*This container styles the divisions of each forcast day container*/
         .forcast
         {
