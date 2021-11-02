@@ -168,7 +168,7 @@ startingPageSetup();
             let lon = "";
             let lat = "";
         
-            var firstQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIkey;
+            var firstQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIkey;
             fetch(firstQueryURL)
             .then(function(response){return response.json();})
             .then(function(data)
